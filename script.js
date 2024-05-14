@@ -370,6 +370,7 @@ let items=[
         "Visitastxt":"1,220,000"
     }
 ]
+var continueCheckbox = document.getElementById("continueCheckbox") 
 
 let index = document.getElementById("index")
 if(index){
@@ -379,6 +380,19 @@ if(index){
     
         window.location.href="../clasico/clasico.html"
     })
+
+    document.getElementById("iniciarSesion").addEventListener("click",function(){
+    
+        window.location.href="../iniciarSesion/iniciarSesion.html"
+    
+    });
+
+    document.getElementById("registrarse").addEventListener("click",function(){
+    
+        window.location.href="../registrarse/registrarse.html"
+    
+    });
+
 }
 
 let clasico = document.getElementById("clasico")
@@ -615,8 +629,10 @@ function esconderVisitas(){
     textoInferior2.style.display="none"
     divNumeroVisitas2.style.display="none"
 }
-}else if(menu1){
- let puntuacionMenu = document.getElementById("puntuacion1")
+}
+let puntuacionMenu = document.getElementById("puntuacion1")
+
+if(puntuacionMenu){
     let valor = localStorage.getItem("contadorGan")
     console.log(localStorage.getItem("contadorGan"))
     puntuacionMenu.textContent=valor;
@@ -642,3 +658,253 @@ function esconderVisitas(){
 
 
 
+ let inicioSesion1= document.getElementById("divInicio")
+ let divOjo = document.getElementById("mostrar")
+
+if(inicioSesion1){
+
+    let divOjoApariencia = false;
+    var spanElementNoVer = document.createElement("span");
+    spanElementNoVer.className = "material-symbols-outlined";
+    spanElementNoVer.textContent = "visibility_off";
+    
+    var spanElementVer = document.createElement("span");
+    spanElementVer.className = "material-symbols-outlined";
+    spanElementVer.textContent = "visibility";
+    
+    let password = document.getElementById("password")
+    
+    
+    document.addEventListener("DOMContentLoaded", function() { //Al refrescarse la pagina primero esta puesto para que tu contraseña este oculta
+        divOjo.appendChild(spanElementNoVer);
+    
+       
+    
+    
+        });
+    
+        document.getElementById("mostrar").addEventListener("click",function(){ //Esto es para ver la contraseña que estas escribiendo
+         while (divOjo.firstChild) {
+          divOjo.removeChild(divOjo.firstChild);
+      }
+    
+          if(divOjoApariencia){
+            divOjo.appendChild(spanElementNoVer);
+            password.type="password"
+    
+          }else{
+            divOjo.appendChild(spanElementVer);
+            password.type="text"
+    
+          }
+          divOjoApariencia=!divOjoApariencia;
+    
+        });
+    
+       
+    
+        document.getElementById("botoncito").addEventListener("click",function(){
+          let valido = true; //Sera true hasta que se falle en algun apartado
+    
+          let usuarioIDValue = document.getElementById("usuarioID").value; //Se necesita el .value para poder hacer un .trim
+          let usuarioID = document.getElementById("usuarioID");
+    
+          let passwordValue = document.getElementById("password").value;
+          let password = document.getElementById("password");
+    
+          let usuarioInvalido = document.getElementById("divErrorUsuario")
+          let contraInvalida = document.getElementById("divErrorContraseña")
+    
+         
+          if(usuarioIDValue.trim()===""){
+            usuarioInvalido.style.display="block";
+            valido=false;
+            
+          }
+    
+         if(passwordValue.trim()===""){
+          contraInvalida.style.display="block";
+          valido=false;
+    
+         }
+    
+         if(valido===false){
+          usuarioID.value=""
+          password.value=""
+    
+    
+          alert("Vuelva a introducir los datos")
+    
+         }else{
+          alert("Usted ha iniciado sesion como: "+usuarioID.value)
+        
+          sessionStorage.setItem('username', usuarioID.value);
+          window.location.href = "../index/index.html";
+    
+         }
+    
+        });
+}
+if(continueCheckbox){
+    let usuarioCorreo = document.getElementById("usuarioCorreo")
+    let divOjo1 = document.getElementById("mostrar1")
+      let divOjoApariencia = false; //Este es para la apariencia de la primera contraseña
+      let divOjoApariencia1 = false; //Este es para la apariencia de la segunda contraseña
+    
+      var spanElementNoVer = document.createElement("span");
+      spanElementNoVer.className = "material-symbols-outlined";
+      spanElementNoVer.textContent = "visibility_off";
+      var spanElementNoVer1 = document.createElement("span");
+      spanElementNoVer1.className = "material-symbols-outlined";
+      spanElementNoVer1.textContent = "visibility_off";
+      
+      var spanElementVer = document.createElement("span");
+      spanElementVer.className = "material-symbols-outlined";
+      spanElementVer.textContent = "visibility";
+      var spanElementVer1 = document.createElement("span");
+      spanElementVer1.className = "material-symbols-outlined";
+      spanElementVer1.textContent = "visibility";
+      
+      let password = document.getElementById("password")
+      let passwordVerificar = document.getElementById("passwordVerificar")
+    
+      
+      document.addEventListener("DOMContentLoaded", function() { //Se ocultan las contraseñas por defecto
+          divOjo.appendChild(spanElementNoVer);
+          divOjo1.appendChild(spanElementNoVer1);
+    
+         
+      
+      
+          });
+      
+          document.getElementById("mostrar").addEventListener("click",function(){//Cada vez que se clicke en el boton para ver la contraseña se borra todos los hijos para que solo se vea una imagen
+           while (divOjo.firstChild) {
+            divOjo.removeChild(divOjo.firstChild);
+        }
+       
+            if(divOjoApariencia){
+              divOjo.appendChild(spanElementNoVer);
+              password.type="password"
+      
+            }else{
+              divOjo.appendChild(spanElementVer);
+              password.type="text"
+      
+            }
+            divOjoApariencia=!divOjoApariencia;
+      
+          });
+    
+          document.getElementById("mostrar1").addEventListener("click",function(){//Cada vez que se clicke en el boton para ver la contraseña se borra todos los hijos para que solo se vea una imagen
+            while (divOjo1.firstChild) {
+             divOjo1.removeChild(divOjo1.firstChild);
+         }
+             if(divOjoApariencia1){
+               divOjo1.appendChild(spanElementNoVer1);
+               password.type="password"
+       
+             }else{
+               divOjo1.appendChild(spanElementVer1);
+               passwordVerificar.type="text"
+       
+             }
+             divOjoApariencia1=!divOjoApariencia1;
+       
+           });
+           
+          
+  
+          document.getElementById("botoncito").addEventListener("click",function(){//Se comprueba todos los inputs que cumplan las conficiones
+            let valido = true;
+            let usuarioIDValue = document.getElementById("usuarioID").value;
+            let usuarioID = document.getElementById("usuarioID");
+      
+            let passwordValue = document.getElementById("password").value;
+            let passwordValue1 = document.getElementById("passwordVerificar").value;
+  
+            let password = document.getElementById("password");
+            let passwordVerificar = document.getElementById("passwordVerificar");
+  
+            let correoInvalido = document.getElementById("divErrorCorreo")
+            let usuarioInvalido = document.getElementById("divErrorUsuario")
+            let contraInvalida = document.getElementById("divErrorContraseña")
+            let contraInvalida1 = document.getElementById("divErrorContraseña1")
+  
+            let correoVerificarValue = document.getElementById("usuarioCorreo").value
+            let correoVerificar = document.getElementById("usuarioCorreo")
+  
+            if(correoVerificarValue.trim()===""){
+              correoInvalido.style.display="block";
+              valido=false
+            }
+  
+            if(!correoVerificarValue.includes("@")){
+              correoInvalido.style.display="block";
+              valido=false
+            }
+            
+            if(usuarioIDValue.trim()===""){
+              usuarioInvalido.style.display="block";
+              valido=false;
+              
+            }
+      
+           if(passwordValue.trim()===""){
+            contraInvalida.style.display="block";
+            valido=false;
+      
+           }
+  
+           if(passwordValue1!==passwordValue){
+            contraInvalida1.style.display="block";
+            valido=false;
+      
+           }
+      
+           if(valido===false){
+            usuarioID.value=""
+                  password.value=""
+                  correoVerificar.value=""
+      
+            alert("Vuelva a introducir los datos")
+            passwordVerificar.value=""
+      
+           }else{
+            
+            if(checkeada===true){
+              alert("Usted ha iniciado sesion como: "+usuarioID.value)
+              sessionStorage.setItem('username', usuarioID.value);
+              window.location.href = "../index/index.html";
+  
+  
+  
+            }else{
+              alert("*Usted ha creado la cuenta*")
+              window.location.href = "../index/index.html";
+  
+            }
+           }
+      
+          });
+  
+         
+          var checkedBox = document.getElementById("continueCheckbox");
+          let checkeada = false;
+          checkedBox.addEventListener("change", function() { // Con esto consigues que si se registra y puede mantener la sesion iniciada
+            if (checkedBox.checked) { 
+              checkeada=true;
+              //console.log("El checkbox está marcado");
+  
+          } else {
+              //console.log("El checkbox no está marcado");
+              checkeada=false;
+  
+  
+          }
+          });
+  
+         
+    
+    
+}
